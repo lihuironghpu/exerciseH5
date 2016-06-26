@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>贝塞尔曲线</title>
+    <style>
+        canvas{
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas1" width="200" height="200">
+        您的浏览器暂时不支持canvas！
+    </canvas>
+    <canvas id="myCanvas2" width="200" height="200">
+        您的浏览器暂时不支持canvas！
+    </canvas>
+    <script>
+        var myCanvas1 = document.getElementById("myCanvas1");
+        myCanvas1.parentNode.parentNode.parentNode.lastChild;
+        var myCanvas2 = document.getElementById("myCanvas2");
+        if(myCanvas1.getContext){
+
+//            绘制二次方贝塞尔曲线
+            var myContext1 = myCanvas1.getContext("2d");
+            myContext1.strokeStyle = "#2c95c4";
+            myContext1.beginPath();
+            myContext1.moveTo(0,200);
+            myContext1.quadraticCurveTo(50,80,200,200);//控制点x，控制点y，终点x，终点y
+            myContext1.stroke();
+            myContext1.globalCompositeOperation = "source-over";
+
+//            绘制控制点和控制线
+            myContext1.strokeStyle = "#aaa";
+            myContext1.beginPath();
+            myContext1.moveTo(0,200);
+            myContext1.lineTo(50,80);
+            myContext1.moveTo(50,80);
+            myContext1.lineTo(200,200);
+            myContext1.stroke();
+
+
+//            绘制三次方贝塞尔曲线
+            var myContext2 = myCanvas2.getContext("2d");
+            myContext2.strokeStyle = "#2c95c4";
+//            myContext2.fillStyle = "#2c95c4";
+            myContext2.beginPath();
+            myContext2.moveTo(0,200);
+            myContext2.bezierCurveTo(25,80,75,80,200,200);//控制点1x，控制点1y，控制点2x，控制点2y，终点x，终点y
+            myContext2.stroke();
+//            myContext2.fill();
+            myContext2.globalCompositeOperation = "source-over";
+
+
+//            绘制控制线
+            myContext2.strokeStyle = '#aaa';
+            myContext2.beginPath();
+            myContext2.moveTo(0,200);
+            myContext2.lineTo(25,80);
+            myContext2.moveTo(75,80);
+            myContext2.lineTo(200,200);
+            myContext2.stroke();
+
+
+
+
+
+
+        }else{
+            alert("您的浏览器暂时不支持canvas！");
+        }
+    </script>
+</body>
+</html>

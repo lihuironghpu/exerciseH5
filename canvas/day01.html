@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas 入门</title>
+    <style>
+        canvas{
+            border: 1px solid #ddd;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="rectangleCanvas" width="200" height="200">
+        您的浏览器暂时不支持canvas属性！
+    </canvas>
+    <canvas id="lineCanvas" width="200" height="200">
+        您的浏览器暂时不支持canvas属性！
+    </canvas>
+    <canvas id="circleCanvas" width="200" height="200">
+        您的浏览器暂时不支持canvas属性！
+    </canvas>
+    <canvas id="myCanvas" width="200" height="200">
+        您的浏览器暂时不支持canvas属性！
+    </canvas>
+    <canvas id="myCanvas2" width="200" height="200">
+        您的浏览器暂时不支持canvas属性！
+    </canvas>
+</body>
+<script>
+    var rectCanvas = document.getElementById("rectangleCanvas");
+    var lineCanvas = document.getElementById("lineCanvas");
+    var circleCanvas = document.getElementById("circleCanvas");
+    var myCanvas = document.getElementById("myCanvas");
+    var myCanvas2 = document.getElementById("myCanvas2");
+
+    if(rectCanvas.getContext){
+
+//        矩形
+        var rectContext = rectCanvas.getContext("2d");
+        rectContext.strokeStyle = "#2c95c4";//轮廓的颜色
+        rectContext.strokeRect(20,50,160,100);//轮廓的位置
+
+        rectContext.fillStyle = "#f33";//填充的颜色
+        rectContext.fillRect(50,75,100,50);//填充的位置
+
+        rectContext.fillStyle = "#fff";//填充的颜色
+        rectContext.fillRect(70,85,60,30);//填充的位置
+
+
+//        直线
+        var lineContext = lineCanvas.getContext("2d");
+        lineContext.fillStyle = "#2c95c4";
+        lineContext.moveTo(50,50);//起始位置
+        lineContext.lineTo(150,150);//终止位置
+        lineContext.moveTo(50,150);//起始位置
+        lineContext.lineTo(150,50);//终止位置
+        lineContext.stroke();//沿线绘制一条直线
+
+//        圆形
+        var circleContext = circleCanvas.getContext("2d");
+        circleContext.fillStyle = "#2c9595";
+        circleContext.beginPath();//开始路径
+        circleContext.arc(100,100,50,0,Math.PI*2,true);//原心的x，圆心的y，半径，开始的角度，结束的角度，是否顺时针
+        circleContext.closePath();//闭合路径
+        circleContext.fill();//填充颜色
+        circleContext.clearRect(90,90,20,20);//清除指定的矩形区域 起始位置x，起始y，宽，高
+
+
+
+//       综合练习1
+        var myContext = myCanvas.getContext("2d");
+        for(var i = 0; i<10 ; i++){
+            drawCircle("#2c95c4",0,0,i*8);
+            drawCircle("#2c95c4",0,200,i*8);
+            drawCircle("#2c95c4",200,0,i*8);
+            drawCircle("#2c95c4",200,200,i*8);
+            drawCircle("#faa",100,100,i*6);
+        }
+        function drawCircle(lineColor,x,y,radius){
+            myContext.strokeStyle = lineColor;//线的颜色
+            myContext.beginPath();//开始绘制
+            myContext.arc(x,y,radius,0,Math.PI*2,true);
+            myContext.closePath();
+            myContext.stroke();//沿线绘制线条
+        }
+
+//       综合练习2
+        var myContext2 = myCanvas2.getContext("2d");
+        myContext2.fillStyle = "#2c95c4";
+        myContext2.moveTo(100,50);
+        myContext2.lineTo(50,150);
+        myContext2.lineTo(150,150);
+        myContext2.fill();
+
+
+
+
+    }else{
+        alert("您的浏览器不支持canvas！")
+    }
+</script>
+</html>
